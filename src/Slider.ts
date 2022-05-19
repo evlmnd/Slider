@@ -3,10 +3,12 @@ import { Slide, SliderOptions } from './models';
 export class Slider {
   options: SliderOptions;
   rootElement: HTMLElement;
-  targetSlideNumber: number = 1;
+  targetSlideNumber: number;
 
   constructor(options: SliderOptions) {
     this.options = options;
+    this.rootElement = document.querySelector(this.options.root) as HTMLElement;
+    this.targetSlideNumber = 1;
   }
 
   start(): void {
@@ -16,7 +18,6 @@ export class Slider {
   }
 
   setUpRootElement(): void {
-    this.rootElement = document.querySelector(this.options.root) as HTMLElement;
     this.rootElement.classList.add('slider');
     this.rootElement.style.width = `${this.options.width}px`;
     this.rootElement.style.height = `${this.options.height}px`;
@@ -27,7 +28,8 @@ export class Slider {
       const slideElement: HTMLElement = document.createElement('div');
       slideElement.classList.add('slider__slide');
       slideElement.innerText = slide.text;
-      slideElement.style.background = slide.color;
+      slideElement.style.backgroundColor = slide.color;
+      slide.imageSrc && (slideElement.style.backgroundImage = `url('${slide.imageSrc}')`);
       this.rootElement.append(slideElement);
     })
   }
