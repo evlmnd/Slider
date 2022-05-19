@@ -52,7 +52,7 @@ const options: SliderOptions = {
     {color: '#c62828', text: 'RED'},
     {color: '#1d1718', text: '', imageSrc: imageThisIsJS},
     {color: '#ad1457', text: 'PINK'},
-    {color: '#1d1718', text: '', imageSrc: imageCat},
+    {color: '#1d1718', text: 'hey', imageSrc: imageCat},
     {color: '#6a1b9a', text: 'PURPLE'},
     {color: '#4527a0', text: 'DEEP_PURPLE'},
     {color: '#283593', text: 'INDIGO'},

@@ -1,4 +1,10 @@
-import { Slide, SliderOptions } from './models';
+import { NonRequiredOptionField, Slide, SliderOptions } from './models';
+
+const defaultSliderOptions: Partial<SliderOptions> = {
+  delay: 2500,
+  width: 750,
+  height: 400,
+};
 
 export class Slider {
   options: SliderOptions;
@@ -9,6 +15,15 @@ export class Slider {
     this.options = options;
     this.rootElement = document.querySelector(this.options.root) as HTMLElement;
     this.targetSlideNumber = 1;
+    this.setUpDefaultOptions();
+  }
+
+  setUpDefaultOptions(): void {
+    Object.keys(defaultSliderOptions).forEach((option: NonRequiredOptionField) => {
+      if (!(option in this.options)) {
+        this.options[option] = defaultSliderOptions[option];
+      }
+    })
   }
 
   start(): void {

@@ -11,3 +11,5 @@ export interface SliderOptions {
   height?: number;
   slides: Slide[];
 }
+
+export type NonRequiredOptionField = 'delay' | 'width' | 'height';
