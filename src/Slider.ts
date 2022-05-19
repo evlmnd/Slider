@@ -1,24 +1,37 @@
-import { NonRequiredOptionField, Slide, SliderOptions } from './models';
+import { ErrorMessageObject, NonRequiredOptionField, Slide, SliderOptions } from './models';
 
-const defaultSliderOptions: Partial<SliderOptions> = {
+const defaultSliderOptions: Partial<SliderOptions> = { // types. extend interface?
   delay: 2500,
   width: 750,
   height: 400,
 };
 
 export class Slider {
+  readonly requiredOptionErrorMessages: ErrorMessageObject = {
+    root: 'Root element id property was not provided.',
+    slides: 'Slide objects were not provided.'
+  };
+
   options: SliderOptions;
   rootElement: HTMLElement;
   targetSlideNumber: number;
 
   constructor(options: SliderOptions) {
     this.options = options;
-    this.rootElement = document.querySelector(this.options.root) as HTMLElement;
     this.targetSlideNumber = 1;
-    this.setUpDefaultOptions();
+    this.checkRequiredOptions();
+    this.setUpDefaultNonRequiredOptions();
   }
 
-  setUpDefaultOptions(): void {
+  checkRequiredOptions(): void {
+    Object.keys(this.requiredOptionErrorMessages).forEach((optionKey: string) => {
+      if (!(optionKey in this.options)) {
+        throw new Error(this.requiredOptionErrorMessages[optionKey]);
+      }
+    })
+  }
+
+  setUpDefaultNonRequiredOptions(): void {
     Object.keys(defaultSliderOptions).forEach((option: NonRequiredOptionField) => {
       if (!(option in this.options)) {
         this.options[option] = defaultSliderOptions[option];
@@ -33,6 +46,7 @@ export class Slider {
   }
 
   setUpRootElement(): void {
+    this.rootElement = document.querySelector(this.options.root) as HTMLElement;
     this.rootElement.classList.add('slider');
     this.rootElement.style.width = `${this.options.width}px`;
     this.rootElement.style.height = `${this.options.height}px`;

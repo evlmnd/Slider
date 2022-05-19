@@ -1,6 +1,6 @@
 export interface Slide {
-  color: string;
-  text: string;
+  color?: string;
+  text?: string;
   imageSrc?: string;
 }
 
@@ -11,5 +11,7 @@ export interface SliderOptions {
   height?: number;
   slides: Slide[];
 }
+
+export type ErrorMessageObject =  {[key: string]: string};
 
 export type NonRequiredOptionField = 'delay' | 'width' | 'height';
