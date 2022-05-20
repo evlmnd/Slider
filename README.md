@@ -1,4 +1,4 @@
-##Hey :) This is simple slider app.
+## Hey :) This is simple slider app.
 
 ### Running development server
 
