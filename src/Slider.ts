@@ -1,16 +1,16 @@
-import { ErrorMessageObject, NonRequiredOptionField, Slide, SliderOptions } from './models';
+import { Slide, SliderOptions } from './models';
+import { Validator } from './Validator';
 
-const defaultSliderOptions: Partial<SliderOptions> = { // types. extend interface?
-  delay: 2500,
-  width: 750,
-  height: 400,
-};
 
 export class Slider {
-  readonly requiredOptionErrorMessages: ErrorMessageObject = {
-    root: 'Root element id property was not provided.',
-    slides: 'Slide objects were not provided.'
+  readonly defaultSliderOptions: Partial<SliderOptions> = {
+    delay: 2500,
+    width: 600,
+    height: 300,
   };
+  readonly requiredOptionFieldNames: Array<keyof SliderOptions> = ['root', 'slides'];
+
+  private validator: Validator;
 
   options: SliderOptions;
   rootElement: HTMLElement;
@@ -18,23 +18,20 @@ export class Slider {
 
   constructor(options: SliderOptions) {
     this.options = options;
+    this.validator = new Validator();
     this.targetSlideNumber = 1;
     this.checkRequiredOptions();
-    this.setUpDefaultNonRequiredOptions();
+    this.setUpDefaultMissingOptions();
   }
 
   checkRequiredOptions(): void {
-    Object.keys(this.requiredOptionErrorMessages).forEach((optionKey: string) => {
-      if (!(optionKey in this.options)) {
-        throw new Error(this.requiredOptionErrorMessages[optionKey]);
-      }
-    })
+    this.validator.validateObjectForRequiredFields(this.requiredOptionFieldNames, this.options);
   }
 
-  setUpDefaultNonRequiredOptions(): void {
-    Object.keys(defaultSliderOptions).forEach((option: NonRequiredOptionField) => {
+  setUpDefaultMissingOptions(): void {
+    Object.keys(this.defaultSliderOptions).forEach((option: keyof SliderOptions) => {
       if (!(option in this.options)) {
-        this.options[option] = defaultSliderOptions[option];
+        this.options[option as string] = this.defaultSliderOptions[option];
       }
     })
   }
@@ -77,6 +74,4 @@ export class Slider {
     this.rootElement.scrollTo({left: targetSlideNumber * this.options.width, behavior: 'smooth'});
     this.targetSlideNumber++;
   }
-
-
 }
