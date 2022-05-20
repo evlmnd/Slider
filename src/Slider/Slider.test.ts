@@ -1,8 +1,6 @@
 import { Slider } from './Slider';
 
 
-jest.mock('../helpers/Validator');
-
 describe('Slider should:', () => {
 
   let options;
@@ -57,12 +55,10 @@ describe('Slider should:', () => {
         {color: '#287cc6', text: 'BLUE'}
       ]
     };
-    try {
-      // @ts-ignore
-      slider = new Slider(options)
-    } catch(error) {
-      expect(slider.checkRequiredOptions).toThrowError(error);
+    const result = () => {
+      new Slider(options);
     }
+    expect(result).toThrowError();
   });
 
   test('throw error if slides are not provided', () => {
@@ -72,14 +68,13 @@ describe('Slider should:', () => {
       width: 750,
       height: 400,
     };
-    try {
-      // @ts-ignore
-      slider = new Slider(options)
-    } catch(error) {
-      expect(slider.checkRequiredOptions).toThrowError(error);
+    const result = () => {
+      new Slider(options);
     }
+    expect(result).toThrowError();
   });
 
   // todo: research jest + clearInterval and finish test:
   // test('stop when runs out of slides', () => {})
+
 })

@@ -25,7 +25,7 @@ export class Slider {
   }
 
   checkRequiredOptions(): void {
-    this.validator.validateObjectForRequiredFields(this.requiredOptionFieldNames, this.options);
+    this.validator.throwErrorIfMissingRequiredFields(this.requiredOptionFieldNames, this.options);
   }
 
   setUpDefaultMissingOptions(): void {
@@ -71,7 +71,7 @@ export class Slider {
   }
 
   switchSlide(targetSlideNumber: number): void {
-    const actualSliderWidth = this.rootElement.offsetWidth; // for adaptivity
+    const actualSliderWidth = this.rootElement.offsetWidth;  // slider width may vary depending on window width
     // todo: create cross-browser custom smooth scroll since safari doesn't support {behavior: 'smooth'} option
     this.rootElement.scrollTo({left: targetSlideNumber * actualSliderWidth, behavior: 'smooth'});
     this.targetSlideNumber++;

@@ -5,7 +5,7 @@
 First you need to install dependencies. Take into consideration that recommended local Node version for this project
 is >=14.x.x.
 
-Run the following command from root directory:
+Run the following command from project's root directory:
 
 `npm i`
 
@@ -17,3 +17,10 @@ for running dev server. Your default browser will automatically open the window 
 can navigate to `http://localhost:1234/` manually.
 
 The window will automatically reload if you change any of the source files.
+
+
+### Running tests
+
+Run the following command from project's root directory for running tests:
+
+`npm test`
