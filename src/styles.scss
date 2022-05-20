@@ -15,7 +15,7 @@ body, h1, h2, h3 {
 }
 
 .slider {
-  border: 1px solid $offWhite;
+  outline: 1px solid $offWhite;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
   grid-auto-flow: column;

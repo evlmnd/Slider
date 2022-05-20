@@ -61,17 +61,19 @@ export class Slider {
   }
 
   showSlides(): void {
-    const interval = setInterval(() => {
+    const slideShow = setInterval(() => {
       if (this.targetSlideNumber < this.options.slides.length) {
         this.switchSlide(this.targetSlideNumber);
       } else {
-        clearInterval(interval);
+        clearInterval(slideShow);
       }
     }, this.options.delay);
   }
 
   switchSlide(targetSlideNumber: number): void {
-    this.rootElement.scrollTo({left: targetSlideNumber * this.options.width, behavior: 'smooth'});
+    const actualSliderWidth = this.rootElement.offsetWidth; // for adaptivity
+    // todo: create cross-browser custom smooth scroll since safari doesn't support {behavior: 'smooth'} option
+    this.rootElement.scrollTo({left: targetSlideNumber * actualSliderWidth, behavior: 'smooth'});
     this.targetSlideNumber++;
   }
 }
