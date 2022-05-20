@@ -1,4 +1,5 @@
-import { SliderOptions } from './models';
+import { SliderOptions } from '../models';
+
 
 export class Validator {
 

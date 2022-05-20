@@ -36,7 +36,7 @@
  * * Решение может быть представлено в виде ссылки на codesandbox(fork) или репозиторий в GH/GL
  * * Если решение представлено в виде репозитория, то в README.MD должны быть указания по запуску
  */
-import { Slider } from './Slider';
+import { Slider } from './Slider/Slider';
 import { SliderOptions } from './models';
 
 import './styles.scss';
@@ -71,4 +71,3 @@ const options: SliderOptions = {
 
 const slider = new Slider(options);
 slider.start();
-
